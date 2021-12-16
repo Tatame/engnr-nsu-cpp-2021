@@ -14,17 +14,16 @@ uint32_t adler32( std::istream &file ){
 }
 
 uint64_t sum64( std::istream &file ){
-    uint64_t sum = 0, end = 0, result = 0;
+    uint64_t sum = 0, end, result;
     unsigned char ch;
-    while (file.read((char *) (&ch), sizeof(uint64_t))){
-        result = (result << 8) | ch;
-        end++;
-        if(end == 8){
-            sum += result;
-            result = 0;
-            end = 0;
+    while (!file.eof()){
+        end = 0;
+        result = 0;
+        while (file.read((char *) (&ch), sizeof(uint64_t)) && end < 8){
+            result = (result << 8) | ch;
+            end++;
         }
+        sum += result;
     }
-    sum += result;
     return sum;
 }

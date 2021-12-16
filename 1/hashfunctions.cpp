@@ -19,7 +19,10 @@ uint64_t sum64( std::istream &file ){
     while (!file.eof()){
         end = 0;
         result = 0;
-        while (file.read((char *) (&ch), sizeof(uint64_t)) && end < 8){
+        while (!file.eof() && end < sizeof(uint64_t) ) {
+            file.read((char *) (&ch), sizeof(uint64_t));
+            std::uint64_t c = file.gcount();
+            if (!c) break;
             result = (result << 8) | ch;
             end++;
         }

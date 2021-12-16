@@ -6,8 +6,7 @@ uint32_t adler32( std::istream &file ){
     uint32_t s1 = 1;
     uint32_t s2 = 0;
     unsigned char ch;
-    while( !file.eof() ){
-        file.read((char *)(&ch), sizeof(unsigned char));
+    while( file.read((char *)(&ch), sizeof(unsigned char)) ){
         s1 = ( s1 + (ch) ) % 65521;
         s2 = ( s2 + s1 ) % 65521;
     }
@@ -15,12 +14,12 @@ uint32_t adler32( std::istream &file ){
 }
 
 uint64_t sum64( std::istream &file ){
-    uint64_t sum = 0, end, result = 0;
+    uint64_t sum = 0, end, result;
     unsigned char ch;
     while (!file.eof()){
         end = 0;
         result = 0;
-        while (!file.eof() && end < 8) {
+        while (!file.eof() && end < sizeof(uint64_t) ) {
             file.read((char *) (&ch), sizeof(uint64_t));
             result = (result << 8) | ch;
             end++;

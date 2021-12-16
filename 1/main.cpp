@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
             return 0;
         }
         else{
-            std::cerr << "Error: unknown command. " << phrase << std::endl;
+            std::cerr << "Error: unknown command. " << std::endl << phrase << std::endl;
             return 1;
         }
     } else if(argc == 4){
@@ -26,15 +26,15 @@ int main(int argc, char *argv[]) {
             mode = argv[3];
             path = argv[1];
         } else{
-            std::cerr << "Error: wrong arguments"  << phrase << std::endl;
+            std::cerr << "Error: wrong arguments" << std::endl << phrase << std::endl;
             return 1;
         }
     } else {
         if(argc == 1){
-            std::cerr << "Error: no arguments" << phrase << std::endl;
+            std::cerr << "Error: no arguments" << std::endl << phrase << std::endl;
             return 1;
         } else {
-            std::cerr << "Error: unknown command" << phrase << std::endl;
+            std::cerr << "Error: unknown command" << std::endl << phrase << std::endl;
             return 1;
         }
     }
@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
     file.open(path, std::ios_base::binary);
 
     if(!(file.is_open())){
-        std::cerr << "Error: File not found" << phrase << std::endl;
+        std::cerr << "Error: File is not found" << std::endl << phrase << std::endl;
         return 1;
     }
     if(file.peek() == EOF){

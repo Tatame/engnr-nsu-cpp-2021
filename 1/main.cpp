@@ -61,8 +61,7 @@ int main(int argc, char *argv[]) {
             std::cout << std::hex << hash << std::endl;
         }
         if(mode == "sum64"){
-            std::uint64_t hash = sum64(file);
-            std::cout << std::hex << hash << std::endl;
+            std::cout << std::hex << sum64(file) << std::endl;
         }
     } catch (std::exception &error) {
         std::cerr << error.what();

@@ -45,15 +45,6 @@ int main(int argc, char *argv[]) {
         std::cerr << "Error: File is not found" << std::endl << phrase << std::endl;
         return 1;
     }
-    if(file.peek() == EOF){
-        if(mode == "adler32"){
-            std::cout << 1 << std::endl;
-        }
-        if(mode == "sum64"){
-            std::cout << 0 << std::endl;
-        }
-        return 0;
-    }
 
     try {
         if(mode == "adler32"){
@@ -63,7 +54,7 @@ int main(int argc, char *argv[]) {
         if(mode == "sum64"){
             std::cout << std::hex << sum64(file) << std::endl;
         }
-    } catch (std::exception &error) {
+    } catch (const std::exception &error) {
         std::cerr << error.what();
         return 1;
     }

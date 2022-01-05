@@ -8,7 +8,7 @@
 #include <cmath>
 #include <iostream>
 #include <utility>
-#include "SafeInt/SafeInt.hpp"
+#include "../SafeInt/SafeInt.hpp"
 #include <memory>
 
 class CalcException : public std::runtime_error {

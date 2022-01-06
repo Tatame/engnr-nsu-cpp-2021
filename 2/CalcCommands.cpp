@@ -180,10 +180,21 @@ Commands* My_Stack::read_command(std::string &str) {
 
 My_Stack ReadFromFile(std::istream &file){
     My_Stack calc;
+    bool flag = false;
     std::string command;
+    std::stringstream stream;
+    std::string com;
     while (!file.eof()){
         std::getline(file, command);
+        stream << command;
+        stream >> com;
         std::unique_ptr<Commands> type(calc.read_command(command));
+        if(com == "PRINT"){
+            if (!flag){ flag = true;
+            } else {
+                std::cout << std::endl;
+            }
+        }
         if (type == nullptr) continue;
         else calc.new_command(std::move(type));
 
@@ -193,10 +204,21 @@ My_Stack ReadFromFile(std::istream &file){
 
 My_Stack ReadFromCin(){
     My_Stack calc;
+    bool flag = false;
     std::string command;
+    std::stringstream stream;
+    std::string com;
     while (!std::cin.eof()){
         std::getline(std::cin, command);
+        stream << command;
+        stream >> com;
         std::unique_ptr<Commands> type(calc.read_command(command));
+        if(com == "PRINT"){
+            if (!flag){ flag = true;
+            } else {
+                std::cout << std::endl;
+            }
+        }
         if (type == nullptr) continue;
         else calc.new_command(std::move(type));
     }

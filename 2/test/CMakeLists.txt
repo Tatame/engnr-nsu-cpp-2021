@@ -1,6 +1,6 @@
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(calculator_tests tests.cpp main.cpp CalcException.h CalcCommands.cpp CalcCommands.h)
+add_executable(calculator_tests tests.cpp ../main.cpp ../CalcException.h ../CalcCommands.cpp ../CalcCommands.h)
 
 target_include_directories(calculator_tests
    PRIVATE "../"

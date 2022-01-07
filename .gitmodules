@@ -1,0 +1,6 @@
+[submodule "3/libs"]
+	path = 3/libs
+	url = https://github.com/dcleblanc/SafeInt.git
+[submodule "3/3/libs"]
+	path = 3/3/libs
+	url = https://github.com/dcleblanc/SafeInt.git

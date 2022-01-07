@@ -1,10 +1,10 @@
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(calculator_tests tests.cpp ../main.cpp ../CalcException.h ../CalcCommands.cpp ../CalcCommands.h)
+add_executable(calculator_tests tests.cpp )
 
-target_include_directories(calculator_tests PRIVATE "../../googletest")
+target_include_directories(calculator_tests PRIVATE "../googletest/googletest/include")
 
-target_link_libraries(calculator_tests gtest gmock_main)
+target_link_libraries(calculator_tests gtest gmock_main calc_l)
 
 enable_testing()
-add_test(NAME google_test COMMAND calculator_tests)
+add_test(NAME googletest COMMAND calculator_tests)

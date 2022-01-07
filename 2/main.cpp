@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "../SafeInt/SafeInt.hpp"
+#include "SafeInt/SafeInt.hpp"
 #include <stdexcept>
 
 int main(int argc, char *argv[]) {

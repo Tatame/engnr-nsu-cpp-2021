@@ -1,6 +1,7 @@
 #ifndef INC_2_CALCCOMMANDS_H
 #define INC_2_CALCCOMMANDS_H
 
+#pragma once
 #include "CalcException.h"
 
 class Action {
@@ -94,6 +95,10 @@ public:
     void new_command(std::unique_ptr<Commands> command);
 
     static Commands* read_command(std::string &str);
+
+    std::int64_t get_result(){
+        return action.stack.top();
+    };
 };
 
 My_Stack ReadFromFile(std::istream &file);

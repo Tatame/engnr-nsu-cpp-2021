@@ -1,10 +1,10 @@
-#include "../../googletest/googletest/include/gtest/gtest.h"
+#include "gtest/gtest.h"
 #include <fstream>
 #include "../CalcException.h"
 #include "../CalcCommands.h"
 
 
-TEST(CALC, FIRST_TEST) {
+TEST(CALC1, FIRST_TEST) {
 std::stringstream data("# myWish = 1000 + 1\n"
                        "PUSH 1000\n"
                        "PUSH 1\n"
@@ -21,10 +21,10 @@ std::stringstream data("# myWish = 1000 + 1\n"
 int64_t value = 4499;
 My_Stack stack;
 stack = ReadFromFile(data);
-EXPECT_EQ(stack.action.stack.top(), value);
+EXPECT_EQ(stack.get_result(), value);
 }
 
-TEST(CALC, SECOND_TEST) {
+TEST(CALC2, SECOND_TEST) {
 std::stringstream data("# |(1 + 2 + 3 + 4 + 5) / 5 * (-3)|\n"
                        "PUSH 1\n"
                        "PUSH 2\n"
@@ -45,29 +45,29 @@ std::stringstream data("# |(1 + 2 + 3 + 4 + 5) / 5 * (-3)|\n"
 int64_t value = 9;
 My_Stack stack;
 stack = ReadFromFile(data);
-EXPECT_EQ(stack.action.stack.top(), value);
+EXPECT_EQ(stack.get_result(), value);
 }
 
-TEST(CALC, EXCECUTION_TEST_ONE) {
+TEST(CALC3, EXCECUTION_TEST_ONE) {
 std::stringstream data("PUSH 5\n"
                        "PUSH 5\n"
                        "MINUS\n"
                        "POP\n"
                        "POP\n");
-EXPECT_THROW(ReadFromStream(data), StackIsEmpty);
+EXPECT_THROW(ReadFromFile(data), StackIsEmpty);
 }
 
-TEST(CALC, EXCECUTION_TEST_TWO) {
+TEST(CALC4, EXCECUTION_TEST_TWO) {
 std::stringstream data("#5+5\n"
                        "PUSH 5\n"
                        "PLUS\n"
                        "PUSH 5\n"
                        "PRINT"
                       );
-EXPECT_THROW(ReadFromStream(data), FewElementsException);
+EXPECT_THROW(ReadFromFile(data), FewElementsException);
 }
 
-TEST(CALC, EXCECUTION_TEST_THREE) {
+TEST(CALC5, EXCECUTION_TEST_THREE) {
 std::stringstream data("PUSH 8\n"
                        "PUSH 5\n"
                        "PLUS\n"
@@ -75,20 +75,20 @@ std::stringstream data("PUSH 8\n"
                        "PLUS\n"
                        "DROW"
                       );
-EXPECT_THROW(ReadFromStream(data), WrongCommand);
+EXPECT_THROW(ReadFromFile(data), WrongCommand);
 }
 
-TEST(CALC, EXCECUTION_TEST_FOUR) {
+TEST(CALC6, EXCECUTION_TEST_FOUR) {
 std::stringstream data("#5+5\n"
                        "PUSH 5\n"
                        "PUSH %\n"
                        "PLUS\n"
                        "PRINT"
                       );
-EXPECT_THROW(ReadFromStream(data), WrongArgument);
+EXPECT_THROW(ReadFromFile(data), WrongArgument);
 }
 
-TEST(CALC, EXCECUTION_TEST_FOUR) {
+TEST(CALC7, EXCECUTION_TEST_FOUR) {
 std::stringstream data("#2/(5-5)\n"
                        "PUSH 5\n"
                        "PUSH 5\n"
@@ -97,14 +97,14 @@ std::stringstream data("#2/(5-5)\n"
                        "DIV"
                        "PRINT"
                       );
-EXPECT_THROW(ReadFromStream(data), DivisionByZero);
+EXPECT_THROW(ReadFromFile(data), DivisionByZero);
 }
 
-TEST(CALC, EXCECUTION_TEST_FOUR) {
+TEST(CALC8, EXCECUTION_TEST_FOUR) {
 std::stringstream data("PUSH 9 223 372 036 854 775 806\n"
                        "PUSH 1000\n"
                        "PLUS"
                        "PRINT"
                       );
-EXPECT_THROW(ReadFromStream(data), OverflowException);
+EXPECT_THROW(ReadFromFile(data), OverflowException);
 } 

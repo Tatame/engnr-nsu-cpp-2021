@@ -1,6 +1,7 @@
 #ifndef INC_2_CALCEXCEPTION_H
 #define INC_2_CALCEXCEPTION_H
 
+#pragma once
 #include <string>
 #include <stack>
 #include <map>
@@ -8,7 +9,7 @@
 #include <cmath>
 #include <iostream>
 #include <utility>
-#include "../SafeInt/SafeInt.hpp"
+#include "SafeInt/SafeInt.hpp"
 #include <memory>
 
 class CalcException : public std::runtime_error {

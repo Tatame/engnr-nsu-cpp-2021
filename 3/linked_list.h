@@ -6,7 +6,7 @@
 #include <exception>
 #include <vector>
 
-template <class T>
+template<class T>
 class LinkedList {
 
 public:
@@ -624,37 +624,28 @@ public:
     }
 
     size_type unique() {
-        std::set<T> unique_values;
-        for(auto it = begin(); it != end(); it++) {
-            if(unique_values.find(*it) == unique_values.end()) {
-                unique_values.insert(*it);
-            } else {
-                erase(it);
-            }
-        }
-        unique_values.clear();
-        return size();
+        return unique([](const auto &left, const auto &right) { return left == right; });
     }
 
     template<typename BinaryPredicate>
     size_type unique(BinaryPredicate p) {
-        auto first = begin();
-        auto last = end();
+        size_type init_cnt = size();
+        auto first = cbegin();
+        if (first == cend())
+            return init_cnt;
 
-        if (first == last)
-            return last;
-
-        size_t count = 0;
-        auto result = first;
-
-        while (++first != last) {
-            if (!p(*result, *first) && ++result != first) {
-                *result = std::move(*first);
-                count++;
+        auto second = ++cbegin();
+        for (; second != cend();) {
+            if (p(*first, *second)) {
+                erase(first);
+                first = second;
+                ++second;
+            } else {
+                ++first;
+                ++second;
             }
         }
-
-        return count;
+        return init_cnt - size();
     }
 
     void reverse() noexcept {
@@ -675,13 +666,7 @@ public:
     }
 
     size_type remove(const T &value) {
-        size_t count = 0;
-        for(auto it = begin(); it != end(); it++)
-            if(*it == value) {
-                erase(it);
-                count++;
-            }
-        return count;
+        return remove_if([&value](auto &item) { return item == value; });
     }
 
     bool operator==(const LinkedList<T> &rhs) {

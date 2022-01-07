@@ -13,14 +13,14 @@ add_executable(lab3 main.cpp)
 
 add_executable(linked_list_tests tests.cpp)
 
-if (WIN32)
-    #do something
-else()
-    target_compile_options(linked_list_tests PUBLIC
-            -fno-omit-frame-pointer -fsanitize=address)
-    target_link_options(linked_list_tests PUBLIC
-            -fno-omit-frame-pointer -fsanitize=address)
-endif()
+#if (WIN32)
+#    #do something
+#else()
+#    target_compile_options(linked_list_tests PUBLIC
+#            -fno-omit-frame-pointer -fsanitize=address)
+#    target_link_options(linked_list_tests PUBLIC
+#            -fno-omit-frame-pointer -fsanitize=address)
+#endif()
 
 
 add_library(linked_list_lib STATIC linked_list.cpp linked_list.h)

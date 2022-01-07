@@ -632,7 +632,8 @@ public:
                 erase(it);
             }
         }
-        return unique_values.size();
+        unique_values.clear();
+        return size();
     }
 
     template<typename BinaryPredicate>

@@ -3,11 +3,11 @@ project(lab3)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_subdirectory(libs/googletest)
+add_subdirectory(googletest)
 
 enable_testing()
 
-include_directories(libs/googletest/googletest/include)
+include_directories(googletest/googletest/include)
 
 add_executable(lab3 main.cpp)
 

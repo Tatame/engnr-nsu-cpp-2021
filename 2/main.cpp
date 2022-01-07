@@ -19,10 +19,6 @@ int main(int argc, char *argv[]) {
                 std::cerr << "Error: File is not found" << std::endl << phrase << std::endl;
                 return 1;
             }
-            // Is it necessary?
-            if (file.peek() == EOF){
-                return 0;
-            }
             ReadFromFile(file);
         } else if (argc == 1){
             ReadFromCin();

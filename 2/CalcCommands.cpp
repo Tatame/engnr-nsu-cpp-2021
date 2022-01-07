@@ -17,7 +17,7 @@ void Push::command_type(Action &action) {
         throw WrongArgument();
     }
     if ((arguments[0] == '-' || std::isdigit(arguments[0])) &&
-        std::all_of(arguments.begin(), arguments.end(), [](char ch){return std::isdigit(ch);})){
+        std::all_of(arguments.begin()+1, arguments.end(), [](char ch){return std::isdigit(ch);})){
         int64_t result{};
         auto er =  std::from_chars(arguments.data(), arguments.data() + arguments.size(), result);
         if (er.ec == std::errc::invalid_argument || er.ec == std::errc::result_out_of_range){
@@ -193,7 +193,6 @@ My_Stack ReadFromFile(std::istream &file){
 
 My_Stack ReadFromCin(){
     My_Stack calc;
-    bool flag = false;
     std::string command;
     while (!std::cin.eof()){
         std::getline(std::cin, command);

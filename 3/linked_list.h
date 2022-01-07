@@ -6,7 +6,7 @@
 #include <exception>
 #include <vector>
 
-template<class T>
+template <class T>
 class LinkedList {
 
 public:
@@ -679,16 +679,13 @@ public:
     }
 
     size_type remove(const T &value) {
-        Node *p = head->next;
-
-        while (p != tail) {
-            if (p->data == value) {
-                erase(iterator(p));
+        size_t count = 0;
+        for(auto it = begin(); it != end(); it++)
+            if(*it == value) {
+                erase(it);
+                count++;
             }
-            p = p->next;
-        }
-
-        return size();
+        return count;
     }
 
     bool operator==(const LinkedList<T> &rhs) {

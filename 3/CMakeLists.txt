@@ -22,13 +22,7 @@ else()
             -fno-omit-frame-pointer -fsanitize=address)
 endif()
 
-
-add_library(linked_list_lib STATIC linked_list.cpp linked_list.h)
-
-target_link_libraries(lab3 linked_list_lib)
-
 target_link_libraries(linked_list_tests
-        linked_list_lib
         gtest
         gmock_main
         )

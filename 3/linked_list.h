@@ -624,19 +624,14 @@ public:
     }
 
     size_type unique() {
-        Node *p = head->next;
         std::set<T> unique_values;
-
-        while (p != tail) {
-            if (unique_values.find(p->data) == unique_values.end()) {
-                unique_values.insert(p->data);
+        for(auto it = begin(); it != end(); it++) {
+            if(unique_values.find(*it) == unique_values.end()) {
+                unique_values.insert(*it);
             } else {
-                erase(iterator(p));
+                erase(it);
             }
-            p = p->next;
         }
-
-        _size == unique_values.size();
         return unique_values.size();
     }
 
@@ -760,10 +755,7 @@ public:
 
     template<typename Iterator>
     void swap(Iterator first, Iterator second) {
-        insert(first, *second);
-        insert(second, *first);
-        erase(first);
-        erase(second);
+        std::iter_swap(first, second);
     }
 
 private:

@@ -273,10 +273,12 @@ TEST(LL_Test, Post_Prefix_It_Inc) {
 
 TEST(LL_TEST, Swap_Iters) {
     LinkedList<int> list = {1, 2};
+
     auto it1 = list.begin();
     auto it2 = it1++;
+
     list.swap(it1, it2);
 
-    ASSERT_EQ(*it2 == 1, true);
-    ASSERT_EQ(*it1 == 2, true);
+    ASSERT_EQ(*it2 == 2, true);
+    ASSERT_EQ(*it1 == 1, true);
 }

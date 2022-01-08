@@ -21,7 +21,7 @@ void Push::command_type(Action &action) {
         int64_t result{};
         auto er =  std::from_chars(arguments.data(), arguments.data() + arguments.size(), result);
         if (er.ec == std::errc::invalid_argument || er.ec == std::errc::result_out_of_range){
-            throw WrongArgument();
+            throw OverflowException();
         }
         action.stack.push(result);
     } else{
@@ -107,7 +107,10 @@ void Div::command_type(Action &action) {
             int64_t value_two = action.stack.top();
             action.stack.pop();
             int64_t value_div;
-            SafeDivide(value_two, value_one, value_div);
+            bool over = SafeDivide(value_two, value_one, value_div);
+            if (!over){
+                throw OverflowException();
+            }
             action.stack.push(value_div);
         }
     }
@@ -129,7 +132,8 @@ void Read::command_type(Action &action) {
         std::all_of(value.begin(), value.end(), [](char ch){return std::isdigit(ch);})){
         int64_t value_push;
         std::from_chars(value.data(), value.data() + value.size(), value_push);
-        action.stack.push(value_push);
+        SafeInt<int64_t, IntOverflowException> value_si = value_push;
+        action.stack.push(value_si);
     } else {
         throw WrongArgument();
     }
@@ -178,11 +182,11 @@ Commands* My_Stack::read_command(std::string &str) {
     return type;
 }
 
-My_Stack ReadFromFile(std::istream &file){
+My_Stack ReadFromStream(std::istream &stream){
     My_Stack calc;
     std::string command;
-    while (!file.eof()){
-        std::getline(file, command);
+    while (!stream.eof()){
+        std::getline(stream, command);
         std::unique_ptr<Commands> type(calc.read_command(command));
         if (type == nullptr) continue;
         else calc.new_command(std::move(type));
@@ -191,15 +195,4 @@ My_Stack ReadFromFile(std::istream &file){
     return calc;
 }
 
-My_Stack ReadFromCin(){
-    My_Stack calc;
-    std::string command;
-    while (!std::cin.eof()){
-        std::getline(std::cin, command);
-        std::unique_ptr<Commands> type(calc.read_command(command));
-        if (type == nullptr) continue;
-        else calc.new_command(std::move(type));
-    }
-    return calc;
-}
 

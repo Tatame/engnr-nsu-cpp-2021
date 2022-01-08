@@ -19,9 +19,9 @@ int main(int argc, char *argv[]) {
                 std::cerr << "Error: File is not found" << std::endl << phrase << std::endl;
                 return 1;
             }
-            ReadFromFile(file);
+            ReadFromStream(file);
         } else if (argc == 1){
-            ReadFromCin();
+            ReadFromStream(std::cin);
         } else{
             std::cerr << "Error: unknown command" << std::endl << phrase << std::endl;
         }

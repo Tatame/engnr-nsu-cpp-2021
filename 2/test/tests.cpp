@@ -20,7 +20,7 @@ std::stringstream data("# myWish = 1000 + 1\n"
                        "PRINT");
 int64_t value = 4499;
 My_Stack stack;
-stack = ReadFromFile(data);
+stack = ReadFromStream(data);
 EXPECT_EQ(stack.get_result(), value);
 }
 
@@ -44,7 +44,7 @@ std::stringstream data("# |(1 + 2 + 3 + 4 + 5) / 5 * (-3)|\n"
                        );
 int64_t value = 9;
 My_Stack stack;
-stack = ReadFromFile(data);
+stack = ReadFromStream(data);
 EXPECT_EQ(stack.get_result(), value);
 }
 
@@ -54,7 +54,7 @@ std::stringstream data("PUSH 5\n"
                        "MINUS\n"
                        "POP\n"
                        "POP\n");
-EXPECT_THROW(ReadFromFile(data), StackIsEmpty);
+EXPECT_THROW(ReadFromStream(data), StackIsEmpty);
 }
 
 TEST(CALC4, EXCECUTION_TEST_TWO) {
@@ -64,7 +64,7 @@ std::stringstream data("#5+5\n"
                        "PUSH 5\n"
                        "PRINT"
                       );
-EXPECT_THROW(ReadFromFile(data), FewElementsException);
+EXPECT_THROW(ReadFromStream(data), FewElementsException);
 }
 
 TEST(CALC5, EXCECUTION_TEST_THREE) {
@@ -75,7 +75,7 @@ std::stringstream data("PUSH 8\n"
                        "PLUS\n"
                        "DROW"
                       );
-EXPECT_THROW(ReadFromFile(data), WrongCommand);
+EXPECT_THROW(ReadFromStream(data), WrongCommand);
 }
 
 TEST(CALC6, EXCECUTION_TEST_FOUR) {
@@ -85,7 +85,7 @@ std::stringstream data("#5+5\n"
                        "PLUS\n"
                        "PRINT"
                       );
-EXPECT_THROW(ReadFromFile(data), WrongArgument);
+EXPECT_THROW(ReadFromStream(data), WrongArgument);
 }
 
 TEST(CALC7, EXCECUTION_TEST_FOUR) {
@@ -97,14 +97,40 @@ std::stringstream data("#2/(5-5)\n"
                        "DIV"
                        "PRINT"
                       );
-EXPECT_THROW(ReadFromFile(data), DivisionByZero);
+EXPECT_THROW(ReadFromStream(data), DivisionByZero);
 }
 
 TEST(CALC8, EXCECUTION_TEST_FOUR) {
-std::stringstream data("PUSH 9 223 372 036 854 775 806\n"
+std::stringstream data("PUSH 9223372036854775806\n"
                        "PUSH 1000\n"
                        "PLUS"
                        "PRINT"
                       );
-EXPECT_THROW(ReadFromFile(data), OverflowException);
-} 
+EXPECT_THROW(ReadFromStream(data), OverflowException);
+}
+
+TEST(CALC9, EXCECUTION_TEST_PYAT) {
+    std::stringstream data("PUSH -9223372036854775808\n"
+                           "PUSH -1\n"
+                           "DIV"
+                           "PRINT"
+    );
+    EXPECT_THROW(ReadFromStream(data), OverflowException);
+}
+
+TEST(CALC10, EXCECUTION_TEST_SIX) {
+    std::stringstream data("PUSH 853373436854\n"
+                           "PUSH 20898131\n"
+                           "MUL\n"
+                           "PRINT\n"
+    );
+    EXPECT_THROW(ReadFromStream(data), OverflowException);
+}
+
+TEST(CALC11, EXCECUTION_TEST_SEVEN) {
+    std::stringstream data("PUSH -9223372036854775808\n"
+                           "ABS\n"
+                           "PRINT\n"
+    );
+    EXPECT_THROW(ReadFromStream(data), OverflowException);
+}

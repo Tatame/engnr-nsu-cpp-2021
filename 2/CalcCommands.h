@@ -101,8 +101,7 @@ public:
     };
 };
 
-My_Stack ReadFromFile(std::istream &file);
+My_Stack ReadFromStream(std::istream &stream);
 
-My_Stack ReadFromCin();
 
 #endif //INC_2_CALCCOMMANDS_H

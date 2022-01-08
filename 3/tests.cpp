@@ -282,3 +282,29 @@ TEST(LL_TEST, Swap_Iters) {
     ASSERT_EQ(*it2 == 2, true);
     ASSERT_EQ(*it1 == 1, true);
 }
+
+TEST(LL_TEST, Reverse_Iterators1) {
+    const LinkedList<int> from = {1, 2, 3, 4, 5};
+    LinkedList<int> actual;
+
+    for (auto it = from.rbegin(); it != from.rend(); ++it) {
+        actual.push_back(*it);
+    }
+
+    const LinkedList<int> expected = {5, 4, 3, 2, 1};
+
+    EXPECT_EQ(expected == actual, true);
+}
+
+TEST (LL_TEST, Reverse_Iterators2) {
+    const LinkedList<int> from;
+    LinkedList<int> actual;
+
+    for (auto it = from.rbegin(); it != from.rend(); ++it) {
+        actual.push_back(*it);
+    }
+
+    const LinkedList<int> expected;
+
+    EXPECT_EQ(expected == actual, true);
+};

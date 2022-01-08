@@ -669,15 +669,28 @@ public:
         return remove_if([&value](auto &item) { return item == value; });
     }
 
+
     bool operator==(const LinkedList<T> &rhs) {
-        if (rhs.size() != (*this).size())
+        if (rhs.size() != size())
             return false;
 
-        auto this_ll = this->begin();
         auto another = rhs.begin();
 
-        for (; this_ll != this->end(); this_ll++, another++)
-            if (*this_ll != *another)
+        for (auto it = begin(); it != end(); it++, another++)
+            if (*it != *another)
+                return false;
+
+        return true;
+    }
+
+    bool operator==(const LinkedList<T> &rhs) const {
+        if (rhs.size() != size())
+            return false;
+
+        auto another = rhs.begin();
+
+        for (auto it = begin(); it != end(); it++, another++)
+            if (*it != *another)
                 return false;
 
         return true;

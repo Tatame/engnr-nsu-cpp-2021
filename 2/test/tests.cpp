@@ -94,7 +94,7 @@ std::stringstream data("# 2/(5-5)\n"
                        "PUSH 5\n"
                        "MINUS\n"
                        "PUSH 2\n"
-                       "DIV"
+                       "DIV\n"
                        "PRINT"
                       );
 EXPECT_THROW(ReadFromStream(data), DivisionByZero);
@@ -103,7 +103,7 @@ EXPECT_THROW(ReadFromStream(data), DivisionByZero);
 TEST(CALC8, EXCECUTION_TEST_FOUR) {
 std::stringstream data("PUSH 9223372036854775806\n"
                        "PUSH 1000\n"
-                       "PLUS"
+                       "PLUS\n"
                        "PRINT"
                       );
 EXPECT_THROW(ReadFromStream(data), OverflowException);
@@ -112,7 +112,7 @@ EXPECT_THROW(ReadFromStream(data), OverflowException);
 TEST(CALC9, EXCECUTION_TEST_PYAT) {
     std::stringstream data("PUSH -9223372036854775808\n"
                            "PUSH -1\n"
-                           "DIV"
+                           "DIV\n"
                            "PRINT"
     );
     EXPECT_THROW(ReadFromStream(data), OverflowException);

@@ -58,7 +58,7 @@ EXPECT_THROW(ReadFromStream(data), StackIsEmpty);
 }
 
 TEST(CALC4, EXCECUTION_TEST_TWO) {
-std::stringstream data("#5+5\n"
+std::stringstream data("# 5+5\n"
                        "PUSH 5\n"
                        "PLUS\n"
                        "PUSH 5\n"
@@ -79,7 +79,7 @@ EXPECT_THROW(ReadFromStream(data), WrongCommand);
 }
 
 TEST(CALC6, EXCECUTION_TEST_FOUR) {
-std::stringstream data("#5+5\n"
+std::stringstream data("# 5+5\n"
                        "PUSH 5\n"
                        "PUSH %\n"
                        "PLUS\n"
@@ -89,7 +89,7 @@ EXPECT_THROW(ReadFromStream(data), WrongArgument);
 }
 
 TEST(CALC7, EXCECUTION_TEST_FOUR) {
-std::stringstream data("#2/(5-5)\n"
+std::stringstream data("# 2/(5-5)\n"
                        "PUSH 5\n"
                        "PUSH 5\n"
                        "MINUS\n"

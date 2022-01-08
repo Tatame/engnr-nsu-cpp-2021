@@ -8,6 +8,8 @@ add_executable(calculator main.cpp )
 add_library(calc_l STATIC CalcException.h CalcCommands.cpp CalcCommands.h)
 
 add_subdirectory(test)
+add_subdirectory(googletest)
+add_subdirectory(SafeInt)
 
 include_directories(googletest/googletest/include)
 include_directories(SafeInt/Test)

@@ -7,6 +7,8 @@ add_executable(calculator main.cpp )
 
 add_library(calc_l STATIC CalcException.h CalcCommands.cpp CalcCommands.h)
 
+enable_testing()
+
 add_subdirectory(test)
 add_subdirectory(googletest)
 add_subdirectory(SafeInt)

@@ -20,7 +20,9 @@ void Push::command_type(Action &action) {
         std::all_of(arguments.begin()+1, arguments.end(), [](char ch){return std::isdigit(ch);})){
         int64_t result{};
         auto er =  std::from_chars(arguments.data(), arguments.data() + arguments.size(), result);
-        if (er.ec == std::errc::invalid_argument || er.ec == std::errc::result_out_of_range){
+        if (er.ec == std::errc::invalid_argument){
+            throw WrongArgument();
+        } else if (er.ec == std::errc::result_out_of_range){
             throw OverflowException();
         }
         action.stack.push(result);
@@ -131,9 +133,13 @@ void Read::command_type(Action &action) {
     if ((value[0] == '-' || std::isdigit(value[0])) &&
         std::all_of(value.begin(), value.end(), [](char ch){return std::isdigit(ch);})){
         int64_t value_push;
-        std::from_chars(value.data(), value.data() + value.size(), value_push);
-        SafeInt<int64_t, IntOverflowException> value_si = value_push;
-        action.stack.push(value_si);
+        auto er = std::from_chars(value.data(), value.data() + value.size(), value_push);
+        if (er.ec == std::errc::invalid_argument){
+            throw WrongArgument();
+        } else if (er.ec == std::errc::result_out_of_range){
+            throw OverflowException();
+        }
+        action.stack.push(value_push);
     } else {
         throw WrongArgument();
     }

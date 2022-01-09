@@ -6,4 +6,4 @@ target_include_directories(calculator_tests PRIVATE "../googletest/googletest/in
 
 target_link_libraries(calculator_tests gtest gmock_main calc_l)
 
-add_test(NAME googletest COMMAND calculator_tests)
+add_test(NAME googletests COMMAND calculator_tests)

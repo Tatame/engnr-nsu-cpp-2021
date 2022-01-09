@@ -281,20 +281,10 @@ public:
     explicit LinkedList(size_type count) {
         init();
 
-        Node *h = head;
-        Node *t = tail;
-
         while (count--) {
-            Node *temp = tail;
-            tail->next = new Node;
-            tail = tail->next;
-            temp->prev->next = tail;
-            tail->prev = temp;
-            tail->next = nullptr;
+            push_back(0);
         }
 
-        head = h;
-        tail = t;
     }
 
     template<typename InputIt>
@@ -649,38 +639,17 @@ public:
     }
 
     void reverse() noexcept {
-        Node *p = head->next;
-        Node *h = head;
-
-        head = tail;
-
-        while (p != nullptr) {
-            Node *d = p->prev;
-            p->prev = p->next;
-            p->next = d;
-
-            p = p->prev;
+        auto it1 = begin();
+        auto it2 = --end();
+        while(it1 != it2) {
+            swap(it1, it2);
+            it1++;
+            it2--;
         }
-
-        tail = h;
     }
 
     size_type remove(const T &value) {
         return remove_if([&value](auto &item) { return item == value; });
-    }
-
-
-    bool operator==(const LinkedList<T> &rhs) {
-        if (rhs.size() != size())
-            return false;
-
-        auto another = rhs.begin();
-
-        for (auto it = begin(); it != end(); it++, another++)
-            if (*it != *another)
-                return false;
-
-        return true;
     }
 
     bool operator==(const LinkedList<T> &rhs) const {
@@ -696,7 +665,7 @@ public:
         return true;
     }
 
-    bool operator!=(const LinkedList<T> &rhs) {
+    bool operator!=(const LinkedList<T> &rhs) const {
         return !(*this == rhs);
     }
 
@@ -728,24 +697,21 @@ public:
         while (diff--) {
             push_back(value);
         }
-        _size = count;
     }
 
     void resize(size_type count) {
-        if (size() >= count)
+        if (size() > count) {
+            auto diff = size() - count;
+            while(diff--) {
+                pop_back();
+            }
             return;
-        auto diff = count - size();
-        Node *t = tail;
-        while (diff--) {
-            tail = new Node;
-            Node *t = tail;
-            tail->next = new Node;
-            tail = tail->next;
-            tail->prev = t;
-            tail->prev->next = tail;
-            tail->next = nullptr;
         }
-        _size += count;
+
+        auto diff = count - size();
+        while (diff--) {
+            push_back(0);
+        }
     }
 
     void swap(LinkedList &other) noexcept {

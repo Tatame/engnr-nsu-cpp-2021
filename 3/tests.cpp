@@ -308,3 +308,27 @@ TEST (LL_TEST, Reverse_Iterators2) {
 
     EXPECT_EQ(expected == actual, true);
 };
+
+TEST (LL_TEST, Reverse_Iterators3) {
+    LinkedList<int> list;
+    list.reverse();
+
+    for (const auto &a: {1, 2, 3, 4, 5}) {
+        list.push_back(a);
+    }
+
+    const LinkedList<int> expected = {1, 2, 3, 4, 5};
+
+    EXPECT_EQ(expected, list);
+}
+
+TEST (LL_TEST, Resize_test) {
+    LinkedList<int> list = {1, 2, 3};
+    list.resize(5);
+    list.resize(2);
+    list.resize(6, 4);
+
+    LinkedList<int> expected = {1, 2, 4, 4, 4, 4};
+
+    EXPECT_EQ(expected, list);
+}

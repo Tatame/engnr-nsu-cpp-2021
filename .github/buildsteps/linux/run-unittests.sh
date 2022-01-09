@@ -12,7 +12,7 @@ ctest --version
 echo
 echo '======================== Unit testing of debug ========================='
 cd 'debug'          || exit $?
-ctest               || exit $?
+ctest --verbose               || exit $?
 cd '..'             || exit $?
 
 echo
@@ -24,7 +24,7 @@ echo
 
 echo '======================== Unit testing of release ======================='
 cd 'release'        || exit $?
-ctest               || exit $?
+ctest --verbose               || exit $?
 cd '..'             || exit $?
 
 echo

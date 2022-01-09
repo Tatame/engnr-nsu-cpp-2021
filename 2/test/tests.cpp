@@ -90,10 +90,10 @@ EXPECT_THROW(ReadFromStream(data), WrongArgument);
 
 TEST(CALC7, EXCECUTION_TEST_4) {
 std::stringstream data("# 2/(5-5)\n"
+                       "PUSH 2\n"
                        "PUSH 5\n"
                        "PUSH 5\n"
                        "MINUS\n"
-                       "PUSH 2\n"
                        "DIV\n"
                        "PRINT"
                       );

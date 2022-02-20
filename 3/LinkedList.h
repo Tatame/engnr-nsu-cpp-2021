@@ -120,7 +120,7 @@ public: // итераторы LegacyBidirectionalIterator (en.cppreference.com/w
         }
 
         bool operator==(const const_iterator &p) const {
-            return cur_node == p.current;
+            return cur_node == p.cur_node;
         }
 
         bool operator!=(const const_iterator &p) const {
@@ -206,7 +206,7 @@ public: // итераторы LegacyBidirectionalIterator (en.cppreference.com/w
         }
 
         bool operator==(const const_reverse_iterator &dif) const{
-            return cur_node == dif.current;
+            return cur_node == dif.cur_node;
         }
 
         bool operator!=(const const_reverse_iterator &dif) const{
@@ -442,7 +442,7 @@ public: // вставка элементов
             pos++;
         }
 
-        return iterator(pos.current);
+        return iterator(pos.cur_node);
     };
 
     iterator insert(const_iterator pos, std::initializer_list<T> ilist){
@@ -450,7 +450,7 @@ public: // вставка элементов
             pos = insert(pos, v);
             pos++;
         }
-        return iterator(pos.current);
+        return iterator(pos.cur_node);
     };
 
     void push_front(const T& value){

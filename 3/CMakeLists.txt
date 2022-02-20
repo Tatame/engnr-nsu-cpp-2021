@@ -3,4 +3,18 @@ project(lab3)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(lab3 main.cpp LinkedList.h)
+add_executable(List main.cpp LinkedList.h)
+
+enable_testing()
+
+add_subdirectory(googletest)
+
+include_directories(googletest/googletest/include)
+
+add_executable(List_tests tests.cpp )
+
+target_include_directories(List_tests PRIVATE "../googletest/googletest/include")
+
+target_link_libraries(List_tests gtest gmock_main)
+
+add_test(NAME googletests COMMAND List_tests)

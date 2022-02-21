@@ -5,6 +5,15 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(List main.cpp LinkedList.h)
 
+if (WIN32)
+    
+else()
+    target_compile_options(linked_list_tests PUBLIC
+            -fno-omit-frame-pointer -fsanitize=address)
+    target_link_options(linked_list_tests PUBLIC
+            -fno-omit-frame-pointer -fsanitize=address)
+endif()
+
 enable_testing()
 
 add_subdirectory(googletest)

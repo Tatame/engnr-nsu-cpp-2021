@@ -11,7 +11,7 @@ include_directories(googletest/googletest/include)
 
 add_executable(List_tests tests.cpp )
 
-target_include_directories(List_tests PRIVATE "../googletest/googletest/include")
+target_include_directories(List_tests PRIVATE "googletest/googletest/include")
 
 target_link_libraries(List_tests gtest gmock_main)
 

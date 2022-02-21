@@ -7,8 +7,6 @@ add_executable(List main.cpp LinkedList.h)
 
 enable_testing()
 
-add_subdirectory(googletest)
-
 include_directories(googletest/googletest/include)
 
 add_executable(List_tests tests.cpp )

@@ -81,6 +81,14 @@ public: // итераторы LegacyBidirectionalIterator (en.cppreference.com/w
             return p;
         }
 
+        iterator operator==(const iterator &p) const {
+            return(*this == p);
+        }
+
+        iterator operator!=(const iterator &p) const {
+            return !(*this == p);
+        }
+
     protected:
         Node *cur_node;
         friend class LinkedList<T>;
@@ -498,6 +506,20 @@ public: // изъятие элементов
 
 public: // операции
 
+    bool operator==(const LinkedList<T> &el) const {
+        if (el.size() != size())
+            return false;
+        auto another = el.begin();
+        for (auto i = begin(); i != end(); i++, another++)
+            if (*i != *another)
+                return false;
+        return true;
+    }
+
+    bool operator!=(const LinkedList<T> &el) const {
+        return !(*this == el);
+    }
+
     void sort(){
         sort(std::less_equal<T>());
     };
@@ -608,19 +630,7 @@ public: // операции
         return count;
     };
 
-    bool operator==(const LinkedList<T> &el) const {
-        if (el.size() != size())
-            return false;
-        auto another = el.begin();
-        for (auto i = begin(); i != end(); i++, another++)
-            if (*i != *another)
-                return false;
-        return true;
-    }
 
-    bool operator!=(const LinkedList<T> &el) const {
-        return !(*this == el);
-    }
 
 public: // прочие модификаторы
 

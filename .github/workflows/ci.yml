@@ -36,10 +36,10 @@ jobs:
         run: |
           cmd /C ".github\buildsteps\windows\run-custom-functionaltests.bat"
       - name: Publish artifacts
-        uses: actions/upload-artifact@v2.1.4
+        uses: actions/upload-artifact@v2.3.1
         with:
           name: lab${{ env.LAB_INDEX }}-windows
-          retention-days: 14
+          retention-days: 21
           path: |
             ${{ env.LAB_INDEX }}/build/x86_32/**/*.exe
             ${{ env.LAB_INDEX }}/build/x86_32/**/*.dll
@@ -75,10 +75,10 @@ jobs:
         run: |
           bash -c ".github/buildsteps/linux/run-custom-functionaltests.sh"
       - name: Publish artifacts
-        uses: actions/upload-artifact@v2.1.4
+        uses: actions/upload-artifact@v2.3.1
         with:
           name: lab${{ env.LAB_INDEX }}-linux
-          retention-days: 14
+          retention-days: 21
           path: |
             ${{ env.LAB_INDEX }}/build/debug/
             ${{ env.LAB_INDEX }}/build/release/
@@ -112,10 +112,10 @@ jobs:
         run: |
           bash -c ".github/buildsteps/macos/run-custom-functionaltests.sh"
       - name: Publish artifacts
-        uses: actions/upload-artifact@v2.1.4
+        uses: actions/upload-artifact@v2.3.1
         with:
           name: lab${{ env.LAB_INDEX }}-macos
-          retention-days: 14
+          retention-days: 21
           path: |
             ${{ env.LAB_INDEX }}/build/debug/
             ${{ env.LAB_INDEX }}/build/release/

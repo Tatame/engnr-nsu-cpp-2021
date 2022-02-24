@@ -5,7 +5,6 @@ cd build                                                      || exit /b 1
 cmake --version                                               || exit /b 1
 
 @echo.
-@echo.
 
 @echo ============================= BUILD x86_64 ==============================
 cmake -E rm -rf "x86_64"                                      || exit /b 1

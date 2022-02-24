@@ -5,6 +5,21 @@ cd "build"                  || exit /b 1
 ctest --version
 
 @echo.
+@echo ======================== Unit testing of x86_32 =========================
+cd "x86_32"                 || exit /b 1
+@echo.                             x86_32 (Debug)
+ctest --verbose -C Debug    || exit /b 1
+@echo.
+@echo.                            x86_32 (Release)
+ctest --verbose -C Release  || exit /b 1
+cd ".."                     || exit /b 1
+
+@echo.
+@echo x86_32: ok.
+@echo =========================================================================
+
+@echo.
+@echo.
 
 @echo ======================== Unit testing of x86_64 =========================
 cd "x86_64"                 || exit /b 1

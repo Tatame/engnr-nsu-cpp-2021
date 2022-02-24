@@ -248,7 +248,7 @@ public: // конструкторы/деструкторы
     explicit LinkedList(size_type count) {
         create();
         while (count) {
-            push_back(0);
+            push_back(T {});
             --count;
         }
 
@@ -397,7 +397,7 @@ public: // доступ к итераторам обратного порядк�
 
 public: // информация о количестве элементов в списке
 
-    size_type size() const noexcept {
+    [[nodiscard]] size_type size() const noexcept {
         return list_size;
     }
 
@@ -533,7 +533,7 @@ public: // операции
         merge(beg, mid, end, comp);
     }
 
-    void _insert(std::vector<value_type> &temp, iterator beg, iterator end) {
+    void insert(std::vector<value_type> &temp, iterator beg, iterator end) {
         for (auto i = beg; i != end; i++)
             temp.push_back(*i);
     }
@@ -554,8 +554,8 @@ public: // операции
                 temp.emplace_back(*left++);
         }
 
-        _insert(temp, left, mid);
-        _insert(temp, right, end);
+        insert(temp, left, mid);
+        insert(temp, right, end);
 
         for (const auto &value: temp) {
             *beg = std::move(value);
@@ -591,7 +591,8 @@ public: // операции
     void reverse() noexcept {
         auto it1 = begin();
         auto it2 = --end();
-        while (it1 != it2) {
+        size_type count = list_size/2;
+        while (count--) {
             swap(it1, it2);
             it1++;
             it2--;
@@ -637,8 +638,13 @@ public:
     }
 
     void resize(size_type count, const value_type &value) {
-        if (size() >= count)
+        if (size() >= count){
+            auto diff = size() - count;
+            while (diff--) {
+                pop_back();
+            }
             return;
+        }
         auto diff = count - size();
         while (diff--) {
             push_back(value);
@@ -653,10 +659,9 @@ public:
             }
             return;
         }
-
         auto diff = count - size();
         while (diff--) {
-            push_back(0);
+            push_back(T {});
         }
     }
 

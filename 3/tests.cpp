@@ -1,6 +1,20 @@
 #include "LinkedList.h"
 #include "gtest/gtest.h"
 
+TEST(LL__Test, Reverse_Test) {
+    LinkedList<int> li1 = {1, 2, 3, 4, 5, 6, 7, 8};
+    LinkedList<int> li2 = {8, 7, 6, 5, 4, 3, 2, 1};
+    li1.reverse();
+    ASSERT_EQ(li1 == li2, true);
+}
+
+TEST(LL__Test, Resize_Test) {
+    LinkedList<int> li1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    LinkedList<int> li2 = {1, 2, 3, 4, 5};
+    li1.resize(5, 666);
+    ASSERT_EQ(li1 == li2, true);
+}
+
 TEST(LL__Test, Copy_Test) {
 LinkedList<int> li = {1, 2, 3, 4, 5};
 const LinkedList<int>& li1(li);
@@ -202,7 +216,7 @@ LinkedList<int> list2 = {1, 2, 3, 4, 5};
 ASSERT_EQ(list1 == list2, true);
 }
 
-TEST(LL__Test, Reverse_Test) {
+TEST(LL__Test, Reverse_Test_test) {
 LinkedList<int> list = {1, 2, 3, 4, 5};
 LinkedList<int> list1 = {5, 4, 3, 2, 1};
 list.reverse();
